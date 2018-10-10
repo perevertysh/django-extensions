@@ -87,14 +87,14 @@ class ActivatorModel(models.Model):
     """ ActivatorModel
     An abstract base class model that provides activate and deactivate fields.
     """
-    INACTIVE_STATUS = 0
-    ACTIVE_STATUS = 1
+    INACTIVE_STATUS = False
+    ACTIVE_STATUS = True
 
     STATUS_CHOICES = (
         (INACTIVE_STATUS, _('Inactive')),
         (ACTIVE_STATUS, _('Active')),
     )
-    status = models.IntegerField(_('status'), choices=STATUS_CHOICES, default=ACTIVE_STATUS)
+    status = models.BooleanField(_('status'), choices=STATUS_CHOICES, default=True)
     activate_date = models.DateTimeField(blank=True, null=True, help_text=_('keep empty for an immediate activation'))
     deactivate_date = models.DateTimeField(blank=True, null=True, help_text=_('keep empty for indefinite activation'))
     objects = ActivatorModelManager()
